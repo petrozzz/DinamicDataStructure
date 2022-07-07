@@ -13,6 +13,11 @@ public:
     Man(string name){
         this->name = name;
     }
+
+    string getName() const{
+        return name;
+    }
+
     friend ostream& operator << (ostream& out, Man& man){
         out << man.name;
         return out;

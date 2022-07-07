@@ -6,52 +6,52 @@
 using namespace std;
 
 template <typename T>
-struct Node {
-    T value;
-    Node* next = nullptr;
+struct NodeLL {
+T value;
+NodeLL* next = nullptr;
 };
 
 template <typename T>
 class LinkedList{
-    Node<T>* head = nullptr;
+    NodeLL<T>* head = nullptr;
     int counter = 0;
 public:
     LinkedList() {}
     LinkedList(T& object) {
-        Node<T> *buff = new Node<T>{object};
+        NodeLL<T> *buff = new NodeLL<T>{object};
         head = buff;
         counter++;
     }
 
     void addToHead(T& object){
-        Node<T>* buff = new Node<T>{object, head};
+        NodeLL<T>* buff = new NodeLL<T>{object, head};
         head = buff;
         counter++;
     }
 
     void addToTail(T& object){
-        Node<T>* buff = head;
+        NodeLL<T>* buff = head;
         while(buff->next != nullptr){
             buff = buff->next;
         }
-        buff->next = new Node<T>{object};
+        buff->next = new NodeLL<T>{object};
         counter++;
     }
 
     void addToPos(T& object, int pos){
         if(counter > pos){
-            Node<T>* buff = head;
+            NodeLL<T>* buff = head;
             for(int k = 0; k < pos-1; k++){
                 buff = buff->next;
-            }            
-            buff->next = new Node<T>{object, buff->next};
+            }
+            buff->next = new NodeLL<T>{object, buff->next};
             counter++;
         }
     }
 
     void deleteFromHead(){
         if(counter){
-            Node<T>* buff = head;
+            NodeLL<T>* buff = head;
             head = head->next;
             delete buff;
             counter--;
@@ -60,7 +60,7 @@ public:
 
     void deleteFromTail(){
         if(counter){
-            Node<T>* buff = head;
+            NodeLL<T>* buff = head;
             while(buff->next->next != nullptr){
                 buff = buff->next;
             }
@@ -72,11 +72,11 @@ public:
 
     void deleteFromPos(int pos){
         if(counter > pos){
-            Node<T>* buff = head;
+            NodeLL<T>* buff = head;
             for(int k = 0; k < pos-1; k++){
                 buff = buff->next;
             }
-            Node<T>* buff2 = buff->next->next;
+            NodeLL<T>* buff2 = buff->next->next;
             delete buff->next;
             buff->next = buff2;
             counter--;
@@ -91,7 +91,7 @@ public:
 
     void show(){
         if(counter){
-            Node<T>* buff = head;
+            NodeLL<T>* buff = head;
             while(buff->next != nullptr){
                 cout << buff->value << " ";
                 buff = buff->next;
@@ -101,7 +101,9 @@ public:
     }
 };
 
+
 void testLinkedList(){
+    std::cout << "Strat testLinkedList" << std::endl;
     Man man1("Ivan1");
     Man man2("Ivan2");
     Man man3("Ivan3");
@@ -122,5 +124,7 @@ void testLinkedList(){
     list.show();
     list.deleteFromTail();
     list.show();
+    std::cout << "End testLinkedList" << std::endl;
 }
+
 #endif // LINKEDLIST_H

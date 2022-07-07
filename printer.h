@@ -39,20 +39,29 @@ class Doc{
     string text;
     User* user = nullptr;
     myTime* time = nullptr;
-public:
-    Doc() {}
+    static int counter_doc;
+public:    
+    Doc() {
+        //counter_doc++;
+    }
+
     Doc(User* user, string title = "", string text = ""){
         this->user = user;
-        time = new myTime(12, 1, 2022, 11, 34, 12);
+        time = new myTime( 4, 07, 2022, 11, 34 + counter_doc, 00 );
         this->text = text;
         this->title = title;
+        counter_doc++;
     }
 
     ~Doc(){
         /*if(user)
-            delete user;*/
+            delete user;*/ // Doc new не писал поэтому и delete не его дело
         /*if(time)
             delete time;*/
+    }
+
+    static int get_counter(){
+        return counter_doc;
     }
 
     friend ostream& operator <<(ostream& out, Doc& doc){
@@ -69,17 +78,20 @@ public:
 class User: Man{
 private:
     int prioryty = 0;
-    //myPrinter* printer;
+    //myPrinter* printer;                                // нет доступа к push
 public:
     User(/*myPrinter* printer,*/ int prioryty = 0){
         //this->printer = printer;
-        this->prioryty = prioryty;
+        this->prioryty = prioryty;       
     }
 
     ~User(){  }
 
     Doc& createDoc(){
-        Doc* doc = new Doc(this, "Doc1.docx", "Text1");
+        string str = "Doc";
+        str.append(to_string(Doc::get_counter()));
+        str.append(".docx");
+        Doc* doc = new Doc(this, str, "Text1");
         return *doc;
     }
 
@@ -92,10 +104,13 @@ class myPrinter: public PriorityQueue<Doc>{
 
 public:
     myPrinter() : PriorityQueue<Doc>(20){
+        // запускается конструктор Doc - 20 раз;
     }
 };
 
+int Doc::counter_doc = 0;
 void testPrinter(){
+    std::cout << "Strat testPrinter" << std::endl;
     myPrinter* printer = new myPrinter();
     User usr1(0);
     User usr2(2);
@@ -104,5 +119,6 @@ void testPrinter(){
     usr2.sendToPrint(usr2.createDoc(), printer);
     usr3.sendToPrint(usr3.createDoc(), printer);
     showDataStructure(PriorityQueue<Doc>(*printer));
+    cout << "End testPrinter" << endl;
 }
 #endif // PRINTER_H

@@ -84,7 +84,7 @@ public:
 template <typename T>
 void showDataStructure(Queue<T> queue){
     while(!queue.empty()){
-        std::cout << queue.front();
+        std::cout << queue.front() << " ";
         queue.pop();
     }
     cout << std::endl;
