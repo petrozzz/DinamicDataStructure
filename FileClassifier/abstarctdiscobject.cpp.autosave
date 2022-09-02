@@ -1,0 +1,6 @@
+#include "abstarctdiscobject.h"
+
+AbstarctDiscObject::AbstarctDiscObject()
+{
+    
+}

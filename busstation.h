@@ -3,7 +3,7 @@
 #include <iostream>
 #include "queue.h"
 #include <stdlib.h>
-#include <ctime>
+#include <time.h>
 
 using namespace std;
 

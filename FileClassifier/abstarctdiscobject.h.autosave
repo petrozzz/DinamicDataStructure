@@ -1,0 +1,24 @@
+#ifndef ABSTARCTDISCOBJECT_H
+#define ABSTARCTDISCOBJECT_H
+
+#include <string>
+
+using std::string;
+
+class AbstarctDiscObject
+{
+/*
+    string root;
+    string name;
+    long size;
+    string create_time;    
+*/
+public:
+    AbstarctDiscObject();
+    virtual string getRoot();
+    virtual string getName();
+    virtual long getSize();
+    virtual string getCreateTime();    
+};
+
+#endif // ABSTARCTDISCOBJECT_H
