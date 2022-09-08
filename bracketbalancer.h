@@ -17,10 +17,10 @@ class BracketBalacner{
     static bool isPair(char ch1, char ch2){
         if (ch1 > ch2)
             swap(ch1, ch2);
-        bool res = (ch1 == '(') && (ch2 == ')') ||
-                (ch1 == '[') && (ch2 == ']') ||
-                (ch1 == '{') && (ch2 == '}') ||
-                (ch1 == '<') && (ch2 == '>') ;
+        bool res = ((ch1 == '(') && (ch2 == ')')) ||
+                ((ch1 == '[') && (ch2 == ']')) ||
+                ((ch1 == '{') && (ch2 == '}')) ||
+                ((ch1 == '<') && (ch2 == '>')) ;
         return res;
     }
 

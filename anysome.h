@@ -6,7 +6,23 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#include <openssl/md5.h>
+#include <QString>
+
 using namespace std;
+
+void getMD5(){
+    QString str = "екатерина андреевна ермолина";
+    unsigned char result[MD5_DIGEST_LENGTH];
+    MD5((unsigned char*)str.data(), 26, result);
+    for(int k = 0; k < MD5_DIGEST_LENGTH; ++k){
+        printf("%02x", result[k]);
+        if(k == 3 || k == 5 || k == 7  || k == 9)
+            printf("%c", '-');
+
+    }
+    std::cout << std::endl;
+}
 
 void testFunsString(){
      int ch = getchar();
@@ -92,71 +108,6 @@ void romb(){
         cout << endl;
     }
     cout << endl;
-}
-
-int game2() {
-    srand(time(0));
-    setlocale(LC_ALL, "Russian");
-    int namber, answer, n = 1;
-    namber = GetRandomNumber(1, 500);
-    cout << "Мы загадали число от 1 до 500" << endl;
-    cout << "Введите это число" << endl;
-    cin >> answer;
-    while (answer != namber) {
-        n++;
-        if (answer == 0) {
-            cout << "Вы вышли из программы";
-            return 0;
-        }
-        else if (answer < namber) {
-            cout << "Упсс, вы не угадали, попробуйте снова" << endl;
-            cout << "Подсказка, Ваше число меньше загаданного" << endl;
-            cin >> answer;
-        }
-        else if (answer > namber) {
-            cout << "Упсс, вы не угадали, попробуйте снова" << endl;
-            cout << "Подсказка, Ваше число больше загаданного" << endl;
-            cin >> answer;
-        }
-    }
-    cout << "Поздравляем, Вы угадали!!!" << endl;
-    cout << "Количество попыток: " << n << endl;
-    cout << "Вы потратили " << clock() / 1000.0 << "секунд" << endl;
-}
-
-void game1(){
-    cout << "\n\t\t\t\t\t    GUESS THE NUMBER GAME\n\n\t\t\t\t  Input number at 1 to 500(input 0 to exit):\n\t\t\t\t\t\t     ";
-        int num = 501;
-        int start_time = clock_t();
-        cout << start_time;
-        int counter = 0;
-        srand(time(NULL));
-        int r = 200;//1 + rand() % 500;
-        while (r != num && num != 0) {
-            cin >> num;
-            if (num < r) {
-                cout << "\t\t\t\t\t     Your number is LESS\n\t\t\t\t\t     Input your number\n\t\t\t\t\t\t     ";
-                counter++;
-
-            }
-            else if (num > r) {
-                cout << "\t\t\t\t\t     Your number is MORE\n\t\t\t\t\t     Input your number\n\t\t\t\t\t\t     ";
-                counter++;
-
-            }
-
-            }
-            if (num != 0) {
-                long stop_time = clock();
-                cout << stop_time;
-                //int sec = (stop_time - start_time) / 1000 % 60;
-                //int min = (stop_time - start_time) / 1000 / 60;
-                counter++;
-                cout << "\t\t\t\t\t\t\  YOUR WIN\n\n\t\t\t\t\t   Number of attempts - " << counter <<
-                    "\n\n\t\t\t\t\t    Yor time - " << "min" << "min:" << stop_time/1000.0 << "sec";
-            }
-            else
-                cout << "\t\t\t\t\t\t    Exit";
 }
 
 void showBricks(const int K = 3,const int N = 16){

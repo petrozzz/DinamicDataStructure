@@ -75,9 +75,8 @@ public:
                 swap(this->priority[k], this->priority[k-1]);
                 k--;
             }
-
         } else {
-            std::cout << "Error, queue overflow." << std::endl;
+            throw "Error, queue overflow.";
         }
     }
 
@@ -93,7 +92,7 @@ public:
             }
 
         } else {
-            std::cout << "Error, queue overflow." << std::endl;
+            throw "Error, queue overflow.";
         }
     }
 
@@ -102,7 +101,7 @@ public:
             this->priority[counter] = priority;
             queue[counter++] = val;
         } else {
-            std::cout << "Error, queue overflow." << std::endl;
+            throw "Error, queue overflow.";
         }
     }
 
@@ -130,19 +129,27 @@ void showDataStructure(PriorityQueue<T> queue){
 
 void testPriorityQueue(){
     std::cout << "Strat testPriorityQueue" << std::endl;
-    PriorityQueue<Man> queue(5);
 
-    Man man1{"Ivan"};
-    Man man2{"Alex"};
-    Man man3{"Georg"};
+    try{
+        PriorityQueue<Man> queue(5);
 
-    queue.push(man1, 1);
-    showDataStructure(queue);
-    queue.push(man2, 0);
-    showDataStructure(queue);
-    queue.push(man3, 1);
-    showDataStructure(queue);
+        Man man1{"Ivan"};
+        Man man2{"Alex"};
+        Man man3{"Georg"};
 
+        queue.push(man1, 1);
+        showDataStructure(queue);
+        queue.push(man2, 0);
+        showDataStructure(queue);
+        queue.push(man3, 1);
+        showDataStructure(queue);
+        queue.push(man3, 1);
+        queue.push(man3, 1);
+        queue.push(man3, 1);
+        queue.push(man3, 1);
+    } catch(const char* exaption){
+        cout << exaption << endl;
+    }
     std::cout << "End testPriorityQueue" << std::endl;
 }
 #endif // PRIORITYQUEUE_H
